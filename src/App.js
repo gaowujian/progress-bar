@@ -9,32 +9,33 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      index:0,
-      
+      index: 0,
+      payload: {
         buttons: [],
         bars: [],
         limit: null
-      
+      }
     }
   }
-  
+
   render() {
     console.log(this.state)
-     let progressBars = null;
-     progressBars = this.state.bars.map((bar,index)=>{
-      return <ProgressBar key={index} style={{width: bar[index]}}></ProgressBar>
-    })
-    
+    let progressBars = null
     let options = null
-    options = this.state.buttons.map((button,index)=>{
-      return <Option key={index}>#progress{index+1}</Option>
-    })
     let buttons = null
-    buttons = this.state.buttons.map((button,index)=><Button key={index}>{button}</Button>)
-  
+    if (this.state.payload) {
+      progressBars = this.state.payload.bars.map((bar, index) => {
+        return <ProgressBar key={index} style={{ width: bar[index] }}></ProgressBar>
+      })
+      options = this.state.payload.buttons.map((button, index) => {
+        return <Option key={index}>#progress{index + 1}</Option>
+      })
+      buttons = this.state.payload.buttons.map((button, index) => <Button key={index}>{button}</Button>)
+    }
+
     return (
       <div className="App">
-        <Title/>
+        <Title />
         {progressBars}
         <select>{options}</select>
         {buttons}
@@ -42,11 +43,11 @@ class App extends Component {
     )
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     const response = await axios.get("http://pb-api.herokuapp.com/bars")
     const data = response.data
-    this.setState(data)
-    console.log(this.state,"dd")
+    this.setState({payload:data})
+    console.log(this.state)
   }
 }
 
