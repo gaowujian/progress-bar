@@ -18,28 +18,48 @@ class App extends Component {
     }
   }
 
+  selectHandler = event => {
+    const value = event.target.value
+    // get the current index
+    const selectedIndex = value.substr(value.length - 1)
+    this.setState({ index: selectedIndex - 1 })
+  }
+  clickHandler = button => {
+    const value = this.state.payload.bars[this.state.index] + button
+    const payload = { ...this.state.payload }
+    payload.bars[this.state.index] = value >= 0 ? value : 0
+  
+    const progressBar = document.querySelector(`.progress-bar-${this.state.index}`)
+    if(value>100)
+      progressBar.classList.add("red")
+    else
+      progressBar.classList.remove("red")
+    this.setState({ payload })
+  }
+
   render() {
-    
     let progressBars = null
     let options = null
     let buttons = null
     if (this.state.payload) {
       progressBars = this.state.payload.bars.map((bar, index) => {
-        return <ProgressBar key={index} width={bar}/>
+        return <ProgressBar className={`progress-bar-${index}`} key={index} width={bar} />
       })
-      options = this.state.payload.buttons.map((button, index) => {
-        return <Option key={button} index={index}/>
+      options = this.state.payload.bars.map((bar, index) => {
+        return <Option key={index} index={index} />
       })
-      buttons = this.state.payload.buttons.map((button, index) => <Button key={index} value={button}/>)
+      buttons = this.state.payload.buttons.map((button, index) => (
+        <Button key={index} value={button} changed={event => this.clickHandler(button)} />
+      ))
     }
-    console.log("progressBars:",progressBars)
-    console.log("options:",options)
-    console.log("buttons:",buttons)
+    // console.log("progressBars:",progressBars)
+    // console.log("options:",options)
+    // console.log("buttons:",buttons)
     return (
       <div className="App">
         <Title />
         {progressBars}
-        <select>{options}</select>
+        <select onChange={this.selectHandler}>{options}</select>
         {buttons}
       </div>
     )
@@ -48,7 +68,7 @@ class App extends Component {
   async componentDidMount() {
     const response = await axios.get("http://pb-api.herokuapp.com/bars")
     const data = response.data
-    this.setState({payload:data})
+    this.setState({ payload: data })
   }
 }
 
