@@ -1,5 +1,36 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Summary
+This project is deployed at https://gaowujian.github.io/progress-bar-deployment/.
+
+All of requirements have been met.
+In terms of responsive design, we have several breakpoints for the main div.
+In terms of test, we have the jest test written in App.test.js,  the simple snapshot testing
+In terms of linting tools, I choose prettier with my own preferred setting
+In terms of styling, we choose scss. And I can write them with styled component if necessary.
+
+## Requirements
+Must read data from the endpoint
+Multiple bars
+One set of controls that can control each bar on the fly
+Can't go under 0
+Can go over limit (defined in API), but limit the bar itself and change its colour
+Display usage amount, centered
+Write tests for your code (hint: TDD strongly preferred)
+Implement a responsive solution: testing it on mobile, tablet, etc. Getting it working nicely.
+Animate the bar change, make sure it works well when you tap buttons quickly.
+Version control (git)
+Once complete publish your code to github, bitbucket or other git based source control.
+
+## Bonus points for implementing "production quality" code, using practices such as:
+
+Setting it up as a project
+Setting up some automated tools
+Linting, code quality, etc
+JavaScript/CSS minification, packaging, etc
+Using a CSS preprocessor like SASS/SCSS
+Styling it to a production quality level
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -27,13 +27,11 @@ class App extends Component {
   clickHandler = button => {
     const value = this.state.payload.bars[this.state.index] + button
     const payload = { ...this.state.payload }
-    payload.bars[this.state.index] = value >= 0 ? value : 0
-  
+    payload.bars[this.state.index] = value >= 0 ? (value <= 230 ? value : 230) : 0
+
     const progressBar = document.querySelector(`.progress-bar-${this.state.index}`)
-    if(value>100)
-      progressBar.classList.add("red")
-    else
-      progressBar.classList.remove("red")
+    if (value > 100) progressBar.classList.add("red")
+    else progressBar.classList.remove("red")
     this.setState({ payload })
   }
 
