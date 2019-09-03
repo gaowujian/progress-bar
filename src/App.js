@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./App.css"
+import "./App.scss"
 import ProgressBar from "./components/ProgressBar"
 import Option from "./components/Option"
 import Button from "./components/Button"
@@ -19,20 +19,22 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
+    
     let progressBars = null
     let options = null
     let buttons = null
     if (this.state.payload) {
       progressBars = this.state.payload.bars.map((bar, index) => {
-        return <ProgressBar key={index} style={{ width: bar[index] }}></ProgressBar>
+        return <ProgressBar key={index} width={bar}/>
       })
       options = this.state.payload.buttons.map((button, index) => {
-        return <Option key={index}>#progress{index + 1}</Option>
+        return <Option key={button} index={index}/>
       })
-      buttons = this.state.payload.buttons.map((button, index) => <Button key={index}>{button}</Button>)
+      buttons = this.state.payload.buttons.map((button, index) => <Button key={index} value={button}/>)
     }
-
+    console.log("progressBars:",progressBars)
+    console.log("options:",options)
+    console.log("buttons:",buttons)
     return (
       <div className="App">
         <Title />
@@ -47,7 +49,6 @@ class App extends Component {
     const response = await axios.get("http://pb-api.herokuapp.com/bars")
     const data = response.data
     this.setState({payload:data})
-    console.log(this.state)
   }
 }
 
