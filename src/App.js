@@ -52,9 +52,7 @@ class App extends Component {
         <Button key={index} value={button} changed={event => this.clickHandler(button)} />
       ))
     }
-    // console.log("progressBars:",progressBars)
-    // console.log("options:",options)
-    // console.log("buttons:",buttons)
+
     return (
       <div className="App">
         <Title />
