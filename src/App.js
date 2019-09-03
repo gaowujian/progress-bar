@@ -64,7 +64,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const response = await axios.get("http://pb-api.herokuapp.com/bars")
+    const response = await axios.get("https://pb-api.herokuapp.com/bars")
     const data = response.data
     this.setState({ payload: data })
   }
