@@ -38,12 +38,13 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.payload.limit)
     let progressBars = null
     let options = null
     let buttons = null
     if (this.state.payload) {
       progressBars = this.state.payload.bars.map((bar, index) => {
-        return <ProgressBar className={`progress-bar-${index}`} key={index} width={bar} />
+        return <ProgressBar className={`progress-bar-${index}`} key={index} width={bar} limit={this.state.payload.limit} />
       })
       options = this.state.payload.bars.map((bar, index) => {
         return <Option key={index} index={index} />

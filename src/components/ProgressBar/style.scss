@@ -1,14 +1,18 @@
-.container{
-  width: 100%;
+.container {
   height: 50px;
   border: 1px solid black;
+  position: relative;
+  margin: 20px;
 }
-.item{
+.length {
+  position: absolute;
+  left: 50%;
+}
+.item {
   background: lightblue;
   height: 100%;
-  max-width: 100%;
-  transition: width 0.5s ease-in-out
+  transition: width 0.1s ease-in-out;
 }
-.red{
-  background:red
+.red {
+  background: red;
 }
