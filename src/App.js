@@ -13,7 +13,7 @@ class App extends Component {
       payload: {
         buttons: [],
         bars: [],
-        limit: null
+        limit: 0
       }
     }
   }
@@ -27,7 +27,7 @@ class App extends Component {
   clickHandler = button => {
     const value = this.state.payload.bars[this.state.index] + button
     const payload = { ...this.state.payload }
-    payload.bars[this.state.index] = value >= 0 ? (value <= 230 ? value : 230) : 0
+    payload.bars[this.state.index] = value >= 0 ? (value <= payload.limit ? value : payload.limit) : 0
 
     const progressBar = document.querySelector(`.progress-bar-${this.state.index}`)
     if (value > 100) progressBar.classList.add("red")
@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.payload.limit)
+  
     let progressBars = null
     let options = null
     let buttons = null
